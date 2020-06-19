@@ -12,6 +12,6 @@ $single_logout_services = explode(',', getenv('SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SE
 foreach ($sp_entity_ids as $index => $sp_entity_id) {
     $metadata[$sp_entity_id] = array(
         'AssertionConsumerService' => $assertion_consumers_services[$index],
-        'SingleLogoutService' => $single_logout_services,
+        'SingleLogoutService' => $single_logout_services[$index],
     );
 }
