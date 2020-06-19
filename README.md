@@ -53,6 +53,20 @@ However you can define your own users by mounting a configuration file:
 
 You can access the SimpleSAMLphp web interface of the IdP under `http://localhost:8080/simplesaml`. The admin password is `secret`.
 
+### Multiple SPs
+
+To configure multiple SPs, you must define the ID, Assertion Consumer Service, and Single Logout Services for each as a comma separated list in the appropriate environment variables. 
+
+```
+docker run --name=testsamlidp_idp \
+-p 8080:8080 \
+-p 8443:8443 \
+-e SIMPLESAMLPHP_SP_ENTITY_ID=http://app.example.com,http://app2.example.com \
+-e SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE=http://localhost/simplesaml/module.php/saml/sp/saml2-acs.php/test-sp,http://app2.example.com/simplesaml/module.php/saml/sp/saml2-acs.php/test-sp \
+-e SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE=http://localhost/simplesaml/module.php/saml/sp/saml2-logout.php/test-sp,http://app2.example.com/simplesaml/module.php/saml/sp/saml2-logout.php/test-sp \
+-d kristophjunge/test-saml-idp
+```
+
 
 ## Test the Identity Provider (IdP)
 
